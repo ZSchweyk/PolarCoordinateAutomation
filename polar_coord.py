@@ -15,7 +15,8 @@ def draw(origin: tuple, coefficients: tuple, num_rot: float, increment: float, x
 
     count = 0
     for theta in np.arange(0, (num_rot * 2 + .01) * math.pi, increment):
-        r = coefficients[0] + coefficients[1] * math.cos(coefficients[2] * theta)
+        # r = coefficients[0] + coefficients[1] * math.cos(coefficients[2] * theta)
+        r = theta
         x = r * math.cos(theta)
         y = r * math.sin(theta)
 
@@ -30,13 +31,12 @@ def draw(origin: tuple, coefficients: tuple, num_rot: float, increment: float, x
         if count == 0:
             pyautogui.moveTo(x, y)
         else:
-            pyautogui.dragTo(x, y, duration=.05)
+            pyautogui.dragTo(x, y, duration=.025)
         count += 1
 
 screen_size = pyautogui.size()
 
 print(screen_size)
 
-draw((screen_size.width / 2 + 100, screen_size.height / 2 + 75), (7, 20, 1), 1, math.pi / 192, (-.62, 27), (-15.2, 15.2), (-300, 300), (-300, 300))
-draw((screen_size.width / 2 - 100, screen_size.height / 2 + 75), (7, -20, 1), 1, math.pi / 192, (-27, .62), (-15.2, 15.2), (-300, 300), (-300, 300))
+draw((screen_size.width / 2 + 100, screen_size.height / 2 + 75), (7, 0, 0), 6, math.pi / 192, (-35, 37.7), (-36.15, 33), (-300, 300), (-300, 300))
 
