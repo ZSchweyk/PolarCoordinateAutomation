@@ -16,8 +16,8 @@ origin = (1000, 950)
 pyautogui.moveTo(origin[0], origin[1])
 
 count = 0
-for theta in np.arange(0, 2.01 * math.pi, math.pi / 192):
-    r = 7 + 7 * math.cos(15 * theta)
+for theta in np.arange(0, 10.01 * math.pi, math.pi / 192):
+    r = 7 + 7 * math.cos(10.2 * theta)
     x = r * math.cos(theta)
     y = r * math.sin(theta)
 
