@@ -9,20 +9,20 @@ def scale(value, v_min, v_max, r_min, r_max):
     return round(r_min + percentage * (r_max - r_min), 2)
 
 
-time.sleep(15)
+time.sleep(3)
 
 origin = (1000, 950)
 
 pyautogui.moveTo(origin[0], origin[1])
 
 count = 0
-for theta in np.arange(0, 10.01 * math.pi, math.pi / 96):
-    r = 7 + math.cos(10.2 * theta)
+for theta in np.arange(0, 2.01 * math.pi, math.pi / 192):
+    r = 7 + 7 * math.cos(15 * theta)
     x = r * math.cos(theta)
     y = r * math.sin(theta)
 
-    x = scale(x, -8, 8, -300, 300)
-    y = scale(y, -8, 8, -300, 300)
+    x = scale(x, -8, 8, -200, 200)
+    y = scale(y, -8, 8, -200, 200)
 
     x += origin[0]
     y += origin[1]
@@ -32,5 +32,5 @@ for theta in np.arange(0, 10.01 * math.pi, math.pi / 96):
     if count == 0:
         pyautogui.moveTo(x, y)
     else:
-        pyautogui.dragTo(x, y, duration=.1)
+        pyautogui.dragTo(x, y, duration=.025)
     count += 1
