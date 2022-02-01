@@ -3,34 +3,38 @@ import time
 import math
 import numpy as np
 
+time.sleep(10)
 
 def scale(value, v_min, v_max, r_min, r_max):
     percentage = (value - v_min) / (v_max - v_min)
     return round(r_min + percentage * (r_max - r_min), 2)
 
+def draw(origin: tuple, coefficients: tuple, num_rot: float, increment: float, scale_vals: tuple):
 
-time.sleep(3)
+    pyautogui.moveTo(origin[0], origin[1])
 
-origin = (1000, 950)
+    count = 0
+    for theta in np.arange(0, (num_rot * 2 + .01) * math.pi, increment):
+        r = coefficients[0] + coefficients[1] * math.cos(coefficients[2] * theta)
+        x = r * math.cos(theta)
+        y = r * math.sin(theta)
 
-pyautogui.moveTo(origin[0], origin[1])
+        x = scale(x, -8, 8, scale_vals[0], scale_vals[1])
+        y = scale(y, -8, 8, scale_vals[0], scale_vals[1])
 
-count = 0
-for theta in np.arange(0, 10.01 * math.pi, math.pi / 192):
-    r = 7 + 7 * math.cos(10.2 * theta)
-    x = r * math.cos(theta)
-    y = r * math.sin(theta)
+        x += origin[0]
+        y += origin[1]
 
-    x = scale(x, -8, 8, -200, 200)
-    y = scale(y, -8, 8, -200, 200)
+        print((x, y))
 
-    x += origin[0]
-    y += origin[1]
+        if count == 0:
+            pyautogui.moveTo(x, y)
+        else:
+            pyautogui.dragTo(x, y, duration=.025)
+        count += 1
 
-    print((x, y))
+screen_size = pyautogui.size()
 
-    if count == 0:
-        pyautogui.moveTo(x, y)
-    else:
-        pyautogui.dragTo(x, y, duration=.025)
-    count += 1
+print(screen_size)
+
+draw((screen_size.width / 2, screen_size.height / 2 - 50), (7, 7, 10), 1, math.pi / 192, (-200, 200))
