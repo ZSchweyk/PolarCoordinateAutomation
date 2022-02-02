@@ -19,8 +19,12 @@ def scale(value, v_min, v_max, r_min, r_max):
 def on_release(key):
     print('{0} released'.format(key))
     #Add your code to stop motor
-    draw_func = Thread(target=lambda: draw((screen_size.width / 2 - 400, screen_size.height / 2 - 40), "8", 1, pi / 192, (-8, 8), (-8, 8),
+    draw_func = Thread(target=lambda: draw((screen_size.width / 2 - 400, screen_size.height / 2 - 40), "7 + 8 * cos(10.05 * theta)", 6
+                                           , pi / 48
+
+                                           , (-15, 15), (-15, 15),
                                (-350, 350), (-350, 350)))
+
 
     global continue_drawing
     global resume
@@ -44,7 +48,7 @@ def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig:
         if continue_drawing == 1:
             r = eval(equation)
 
-            x = r * cos(theta)
+            x = -r * cos(theta)
             y = r * sin(theta)
 
             x = scale(x, x_orig[0], x_orig[1], x_scaled[0], x_scaled[1])
