@@ -5,9 +5,6 @@ import numpy as np
 from pynput import keyboard
 from threading import Thread
 
-time.sleep(3)
-
-
 
 continue_drawing = 0
 resume = True
@@ -17,7 +14,6 @@ def scale(value, v_min, v_max, r_min, r_max):
     return round(r_min + percentage * (r_max - r_min), 2)
 
 def on_release(key):
-    print('{0} released'.format(key))
     #Add your code to stop motor
     draw_func = Thread(target=lambda:
         draw(
@@ -27,8 +23,8 @@ def on_release(key):
             pi / 1000,
             (-8, 8),
             (-8, 8),
-            (-300, 300),
-            (-300, 300)
+            (-350, 350),
+            (-350, 350)
         )
     )
 
@@ -74,15 +70,15 @@ def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig:
                 pyautogui.dragTo(x, y, duration=.025)
             count += 1
         elif continue_drawing == 2:
-            print("Exited")
             return
         elif continue_drawing == 3:
             global resume
-            print("resume:", resume)
             while not resume:
                 pass
             else:
                 continue_drawing = 1
+    print("Completed drawing the polar equation!")
+    return
 
 
 
