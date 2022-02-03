@@ -59,7 +59,7 @@ def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig:
             x += origin[0]
             y += origin[1]
 
-            # print((x, y))jk
+            # print((x, y))
 
             if count == 0:
                 pyautogui.moveTo(x, y)
