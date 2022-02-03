@@ -33,24 +33,45 @@ def on_release(key):
 def polar_equations():
     draw(
         (screen_size.width / 2 - 400, screen_size.height / 2 - 50),
-        "11 + 4 * cos(8.05 * theta)",
+        "max(11, 10) + 4 * cos(8.05 * theta)",
         6,
         pi / 175,
         (-15, 15),
-
         (-15, 15),
         (-350, 350),
         (-350, 350)
-
     )
 
 
 def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig: tuple, y_orig: tuple,
          x_scaled: tuple, y_scaled: tuple):
+
     pyautogui.moveTo(origin[0], origin[1])
+
     global is_program_running
-    count = 0
     global continue_drawing
+    count = 0
+
+    builtin_restrictions = {
+        "min": min,
+        "max": max,
+    }
+    other_restrictions = {
+        "sqrt": sqrt,
+        "sin": sin,
+        "cos": cos,
+    }
+
+    theta = 0
+    other_restrictions["theta"] = theta
+    try:
+        eval(equation, {"__builtins__": builtin_restrictions}, other_restrictions)
+    except Exception as exception:
+        print("Invalid Input!")
+        print(exception)
+        is_program_running = False
+        return
+
     for theta in np.arange(0, (num_rot * 2 + .01) * pi, increment):
         if continue_drawing == 1:
             r = eval(equation)
