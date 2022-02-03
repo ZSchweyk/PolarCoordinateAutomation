@@ -14,15 +14,14 @@ def scale(value, v_min, v_max, r_min, r_max):
     return round(r_min + percentage * (r_max - r_min), 2)
 
 def on_release(key):
-    #Add your code to stop motor
     draw_func = Thread(target=lambda:
         draw(
             (screen_size.width / 2, screen_size.height / 2),
-            "7 + cos(8.2 * theta)",
+            "7 + 8 * cos(8.2 * theta)",
             5,
-            pi / 1000,
-            (-8, 8),
-            (-8, 8),
+            pi / 2000,
+            (-15, 15),
+            (-15, 15),
             (-350, 350),
             (-350, 350)
         )
