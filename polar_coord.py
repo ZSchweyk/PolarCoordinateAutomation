@@ -8,49 +8,54 @@ from threading import Thread
 
 continue_drawing = 0
 resume = True
+is_program_running = True
 
 def scale(value, v_min, v_max, r_min, r_max):
     percentage = (value - v_min) / (v_max - v_min)
     return round(r_min + percentage * (r_max - r_min), 2)
 
 def on_release(key):
-    draw_func = Thread(target=lambda:
-        draw(
-            (screen_size.width / 2, screen_size.height / 2),
-            "11 + 4 * cos(8.05 * theta)",
-            6,
-            pi / 2000,
-            (-15, 15),
-            (-15, 15),
-            (-350, 350),
-            (-350, 350)
-        )
-    )
-
-
+    draw_func = Thread(target=polar_equations)
+    global is_program_running
     global continue_drawing
     global resume
-    if key == keyboard.Key.enter:
-        continue_drawing = 1
-        draw_func.start()
-    elif key == keyboard.Key.esc:
-        continue_drawing = 2
-    elif key == keyboard.Key.space:
-        resume = not resume
-        continue_drawing = 3
+    if is_program_running:
+        if key == keyboard.Key.enter:
+            continue_drawing = 1
+            draw_func.start()
+        elif key == keyboard.Key.esc:
+            continue_drawing = 2
+        elif key == keyboard.Key.space:
+            resume = not resume
+            continue_drawing = 3
+
+
+def polar_equations():
+    draw(
+        (screen_size.width / 2 - 400, screen_size.height / 2 - 50),
+        "11 + 4 * cos(8.05 * theta)",
+        6,
+        pi / 175,
+        (-15, 15),
+
+        (-15, 15),
+        (-350, 350),
+        (-350, 350)
+
+    )
 
 
 def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig: tuple, y_orig: tuple,
          x_scaled: tuple, y_scaled: tuple):
     pyautogui.moveTo(origin[0], origin[1])
-
+    global is_program_running
     count = 0
     global continue_drawing
     for theta in np.arange(0, (num_rot * 2 + .01) * pi, increment):
         if continue_drawing == 1:
             r = eval(equation)
 
-            x = -r * cos(theta)
+            x = r * cos(theta)
             y = r * sin(theta)
 
             x = scale(x, x_orig[0], x_orig[1], x_scaled[0], x_scaled[1])
@@ -69,6 +74,8 @@ def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig:
                 pyautogui.dragTo(x, y, duration=.025)
             count += 1
         elif continue_drawing == 2:
+            print("Drawing was stopped.")
+            is_program_running = False
             return
         elif continue_drawing == 3:
             global resume
@@ -77,6 +84,7 @@ def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig:
             else:
                 continue_drawing = 1
     print("Completed drawing the polar equation!")
+    is_program_running = False
     return
 
 
