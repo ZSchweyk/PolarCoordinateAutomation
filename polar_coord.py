@@ -19,11 +19,11 @@ def scale(value, v_min, v_max, r_min, r_max):
 def on_release(key):
     print('{0} released'.format(key))
     #Add your code to stop motor
-    draw_func = Thread(target=lambda: draw((screen_size.width / 2 - 400, screen_size.height / 2 - 40), "7 + 8 * cos(10.05 * theta)", 6
-                                           , pi / 48
+    draw_func = Thread(target=lambda: draw((screen_size.width / 2, screen_size.height / 2), "theta + 7 * cos(15 * theta)", 6
+                                           , pi / 1000
 
-                                           , (-15, 15), (-15, 15),
-                               (-350, 350), (-350, 350)))
+                                           , (-41, 45), (-43, 40),
+                               (-300, 300), (-300, 300)))
 
 
     global continue_drawing
