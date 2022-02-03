@@ -18,8 +18,8 @@ def on_release(key):
     draw_func = Thread(target=lambda:
         draw(
             (screen_size.width / 2, screen_size.height / 2),
-            "7 + cos(8.1 * theta)",
-            6,
+            "7 + cos(8.2 * theta)",
+            5,
             pi / 1000,
             (-8, 8),
             (-8, 8),
