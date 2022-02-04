@@ -120,6 +120,7 @@ def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
     x1, x2 = boundaries
     r = f"{a} / sin(theta)"
     theta1 = acot(x1 / a) # this comes out to equal -pi/4, not 3pi/4 ??!!
+    # https://docs.sympy.org/latest/modules/functions/elementary.html#:~:text=Its%20range%20for,.
     theta2 = acot(x2 / a) # pi/4
     print(x1 / a, x2 / a)
     print(theta1, theta2)
