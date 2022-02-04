@@ -45,13 +45,14 @@ def polar_equations():
     #     (-350, 350)
     # )
 
-    # draw_y_equals_a(5, [-5, 5])
+    draw_y_equals_a((screen_size.width / 2 - 400, screen_size.height / 2 - 50), 5, [-5, 5])
 
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
          x_scaled: tuple, y_scaled: tuple):
 
     pyautogui.moveTo(origin[0], origin[1])
+
 
     global is_program_running
     global continue_drawing
@@ -76,6 +77,8 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
         print(exception)
         is_program_running = False
         return
+
+    print(np.arange(np_arange_args[0], (np_arange_args[1] + .01), np_arange_args[2]))
 
     for theta in np.arange(np_arange_args[0], (np_arange_args[1] + .01), np_arange_args[2]):
         if continue_drawing == 1:
@@ -113,11 +116,22 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
     is_program_running = False
     return
 
-def draw_y_equals_a(a: float, boundaries: list):
-    x1, y1 = boundaries
-    r, theta = symbols("r theta")
-    r = a / sin(theta)
-    print(r)
+def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
+    x1, x2 = boundaries
+    r = f"{a} / sin(theta)"
+    theta1 = acot(x1 / a) # this comes out to equal -pi/4, not 3pi/4 ??!!
+    theta2 = acot(x2 / a) # pi/4
+    print(x1 / a, x2 / a)
+    print(theta1, theta2)
+    draw_polar(
+        origin,
+        r,
+        [theta1, theta2, pi/196],
+        (x1, x2),
+        (a-1, a+1),
+        (-350, 350),
+        (0, 700)
+    )
 
 
 
@@ -127,7 +141,7 @@ def draw_y_equals_a(a: float, boundaries: list):
 # equations = [
 #     "10 + 2 * sin(62 * theta)",
 #     "12",
-#     "8",l
+#     "8",
 #     "7 + sin(50 * theta)",
 #     "6",
 #     "5 + .8 * sin(25 * theta)",
