@@ -4,6 +4,7 @@ from math import *
 import numpy as np
 from pynput import keyboard
 from threading import Thread
+from sympy import *
 
 
 continue_drawing = 0
@@ -31,19 +32,23 @@ def on_release(key):
 
 
 def polar_equations():
-    draw(
-        (screen_size.width / 2 - 400, screen_size.height / 2 - 50),
-        "max(11, 10) + 4 * cos(8.05 * theta)",
-        6,
-        pi / 175,
-        (-15, 15),
-        (-15, 15),
-        (-350, 350),
-        (-350, 350)
-    )
+    screen_size = pyautogui.size()
+    print(screen_size)
+
+    # draw_polar(
+    #     (screen_size.width / 2 - 400, screen_size.height / 2 - 50),
+    #     "max(11, 10) + 4 * cos(8.05 * theta)",
+    #     [0, 12 * pi, pi / 48],
+    #     (-15, 15),
+    #     (-15, 15),
+    #     (-350, 350),
+    #     (-350, 350)
+    # )
+
+    # draw_y_equals_a(5, [-5, 5])
 
 
-def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig: tuple, y_orig: tuple,
+def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
          x_scaled: tuple, y_scaled: tuple):
 
     pyautogui.moveTo(origin[0], origin[1])
@@ -72,7 +77,7 @@ def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig:
         is_program_running = False
         return
 
-    for theta in np.arange(0, (num_rot * 2 + .01) * pi, increment):
+    for theta in np.arange(np_arange_args[0], (np_arange_args[1] + .01), np_arange_args[2]):
         if continue_drawing == 1:
             r = eval(equation)
 
@@ -108,12 +113,16 @@ def draw(origin: tuple, equation: str, num_rot: float, increment: float, x_orig:
     is_program_running = False
     return
 
+def draw_y_equals_a(a: float, boundaries: list):
+    x1, y1 = boundaries
+    r, theta = symbols("r theta")
+    r = a / sin(theta)
+    print(r)
 
 
 
-screen_size = pyautogui.size()
 
-print(screen_size)
+
 
 # equations = [
 #     "10 + 2 * sin(62 * theta)",
