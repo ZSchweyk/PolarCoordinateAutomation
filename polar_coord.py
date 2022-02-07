@@ -35,17 +35,17 @@ def polar_equations():
     screen_size = pyautogui.size()
     print(screen_size)
 
-    # draw_polar(
-    #     (screen_size.width / 2 - 400, screen_size.height / 2 - 50),
-    #     "max(11, 10) + 4 * cos(8.05 * theta)",
-    #     [0, 12 * pi, pi / 48],
-    #     (-15, 15),
-    #     (-15, 15),
-    #     (-350, 350),
-    #     (-350, 350)
-    # )
+    draw_polar(
+        (screen_size.width / 2, screen_size.height / 2),
+        "8",
+        [0, 2 * pi, pi / 1000],
+        (-8, 8),
+        (-8, 8),
+        (-350, 350),
+        (-350, 350)
+    )
 
-    draw_y_equals_a((screen_size.width / 2 - 400, screen_size.height / 2 - 50), 5, [-5, 5])
+    # draw_y_equals_a((screen_size.width / 2 - 400, screen_size.height / 2 - 50), 5, [-5, 5])
 
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
@@ -78,7 +78,7 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
         is_program_running = False
         return
 
-    print(np.arange(np_arange_args[0], (np_arange_args[1] + .01), np_arange_args[2]))
+    # print(np.arange(np_arange_args[0], (np_arange_args[1] + .01), np_arange_args[2]))
 
     for theta in np.arange(np_arange_args[0], (np_arange_args[1] + .01), np_arange_args[2]):
         if continue_drawing == 1:
