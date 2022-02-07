@@ -6,14 +6,15 @@ from pynput import keyboard
 from threading import Thread
 from sympy import *
 
-
 continue_drawing = 0
 resume = True
 is_program_running = True
 
+
 def scale(value, v_min, v_max, r_min, r_max):
     percentage = (value - v_min) / (v_max - v_min)
     return round(r_min + percentage * (r_max - r_min), 2)
+
 
 def on_release(key):
     draw_func = Thread(target=polar_equations)
@@ -35,24 +36,22 @@ def polar_equations():
     screen_size = pyautogui.size()
     print(screen_size)
 
-    draw_polar(
-        (screen_size.width / 2, screen_size.height / 2),
-        "8",
-        [0, 2 * pi, pi / 1000],
-        (-8, 8),
-        (-8, 8),
-        (-350, 350),
-        (-350, 350)
-    )
+    # draw_polar(
+    #     (screen_size.width / 2, screen_size.height / 2),
+    #     "8",
+    #     [0, 2 * pi, pi / 1000],
+    #     (-8, 8),
+    #     (-8, 8),
+    #     (-350, 350),
+    #     (-350, 350)
+    # )
 
     # draw_y_equals_a((screen_size.width / 2 - 400, screen_size.height / 2 - 50), 5, [-5, 5])
 
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
-         x_scaled: tuple, y_scaled: tuple):
-
+               x_scaled: tuple, y_scaled: tuple):
     pyautogui.moveTo(origin[0], origin[1])
-
 
     global is_program_running
     global continue_drawing
@@ -116,27 +115,24 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
     is_program_running = False
     return
 
+
 def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
     x1, x2 = boundaries
     r = f"{a} / sin(theta)"
-    theta1 = acot(x1 / a) # this comes out to equal -pi/4, not 3pi/4 ??!!
+    theta1 = acot(x1 / a)  # this comes out to equal -pi/4, not 3pi/4 ??!!
     # https://docs.sympy.org/latest/modules/functions/elementary.html#:~:text=Its%20range%20for,.
-    theta2 = acot(x2 / a) # pi/4
+    theta2 = acot(x2 / a)  # pi/4
     print(x1 / a, x2 / a)
     print(theta1, theta2)
     draw_polar(
         origin,
         r,
-        [theta1, theta2, pi/196],
+        [theta1, theta2, pi / 196],
         (x1, x2),
-        (a-1, a+1),
+        (a - 1, a + 1),
         (-350, 350),
         (0, 700)
     )
-
-
-
-
 
 
 # equations = [
@@ -151,5 +147,3 @@ def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
 #
 with keyboard.Listener(on_release=on_release) as listener:
     listener.join()
-
-
