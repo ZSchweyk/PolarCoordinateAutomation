@@ -1,5 +1,5 @@
 from sympy import *
 # from math import *
 
-print(acot(1))
+print(acot(-1))
 

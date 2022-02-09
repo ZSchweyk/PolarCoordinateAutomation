@@ -46,7 +46,7 @@ def polar_equations():
     #     (-350, 350)
     # )
 
-    # draw_y_equals_a((screen_size.width / 2 - 400, screen_size.height / 2 - 50), 5, [-5, 5])
+    draw_y_equals_a((screen_size.width / 2 - 400, screen_size.height / 2 - 50), 5, [-5, 5])
 
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
@@ -119,15 +119,16 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
 def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
     x1, x2 = boundaries
     r = f"{a} / sin(theta)"
-    theta1 = acot(x1 / a)  # this comes out to equal -pi/4, not 3pi/4 ??!!
-    # https://docs.sympy.org/latest/modules/functions/elementary.html#:~:text=Its%20range%20for,.
-    theta2 = acot(x2 / a)  # pi/4
-    print(x1 / a, x2 / a)
-    print(theta1, theta2)
+    eval_acot = lambda x, a: acot(x / a)
+    theta1 = (eval_acot(x1, a) + pi) if eval_acot(x1, a) < 0 else eval_acot(x1, a)
+    theta2 = (eval_acot(x2, a) + pi) if eval_acot(x2, a) < 0 else eval_acot(x2, a)
+    print(x1 / a, theta1)
+    print(x2 / a, theta2)
+
     draw_polar(
         origin,
         r,
-        [theta1, theta2, pi / 196],
+        [min(theta1, theta2), max(theta1, theta2), pi / 196],
         (x1, x2),
         (a - 1, a + 1),
         (-350, 350),
