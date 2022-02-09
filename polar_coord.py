@@ -46,7 +46,7 @@ def polar_equations():
     #     (-350, 350)
     # )
 
-    draw_y_equals_a((screen_size.width / 2 - 400, screen_size.height / 2 - 50), 5, [-5, 5])
+    draw_y_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), 3, [-5, 5])
 
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
@@ -92,7 +92,7 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
             x += origin[0]
             y += origin[1]
 
-            # print((x, y))
+            print((x, y))
 
             if count == 0:
                 pyautogui.moveTo(x, y)
@@ -130,9 +130,9 @@ def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
         r,
         [min(theta1, theta2), max(theta1, theta2), pi / 196],
         (x1, x2),
-        (a - 1, a + 1),
+        (0, 15),
         (-350, 350),
-        (0, 700)
+        (-400, 0)
     )
 
 
