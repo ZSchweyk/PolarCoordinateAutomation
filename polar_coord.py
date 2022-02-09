@@ -45,7 +45,7 @@ def polar_equations():
     #     (-350, 350),
     #     (-350, 350)
     # )
-    for a in range(1, 16, 2):
+    for a in range(-1, -16, -2):
         draw_y_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), a, [-5, 5])
 
 
@@ -142,10 +142,15 @@ def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
             r,
             [min(theta1, theta2), max(theta1, theta2), pi / 196],
             (x1, x2),
-            (0, 15),
-            (-350, 350),
-            (-400, 0)
+            (0, -15),
+            (-200, 200),
+            (0, 350)
         )
+
+def draw_x_equals_a(origin: tuple, a: float, boundaries: list):
+    y1, y2 = boundaries
+    r = f"{a} / cos(theta)"
+
 
 
 # equations = [
