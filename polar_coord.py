@@ -45,13 +45,16 @@ def polar_equations():
     #     (-350, 350),
     #     (-350, 350)
     # )
-
-    draw_y_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), 3, [-5, 5])
+    for a in range(1, 16, 2):
+        draw_y_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), a, [-5, 5])
 
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
                x_scaled: tuple, y_scaled: tuple):
+
     pyautogui.moveTo(origin[0], origin[1])
+    pyautogui.leftClick()
+
 
     global is_program_running
     global continue_drawing
@@ -122,18 +125,27 @@ def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
     eval_acot = lambda x, a: acot(x / a)
     theta1 = (eval_acot(x1, a) + pi) if eval_acot(x1, a) < 0 else eval_acot(x1, a)
     theta2 = (eval_acot(x2, a) + pi) if eval_acot(x2, a) < 0 else eval_acot(x2, a)
-    print(x1 / a, theta1)
-    print(x2 / a, theta2)
 
-    draw_polar(
-        origin,
-        r,
-        [min(theta1, theta2), max(theta1, theta2), pi / 196],
-        (x1, x2),
-        (0, 15),
-        (-350, 350),
-        (-400, 0)
-    )
+    if a >= 0:
+        draw_polar(
+            origin,
+            r,
+            [min(theta1, theta2), max(theta1, theta2), pi / 196],
+            (x1, x2),
+            (0, 15),
+            (-200, 200),
+            (0, -350)
+        )
+    else:
+        draw_polar(
+            origin,
+            r,
+            [min(theta1, theta2), max(theta1, theta2), pi / 196],
+            (x1, x2),
+            (0, 15),
+            (-350, 350),
+            (-400, 0)
+        )
 
 
 # equations = [
