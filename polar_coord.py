@@ -45,8 +45,12 @@ def polar_equations():
     #     (-350, 350),
     #     (-350, 350)
     # )
-    for a in range(-1, -16, -2):
-        draw_y_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), a, [-5, 5])
+
+    # for a in range(-1, -16, -2):
+    #     draw_y_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), a, [-5, 5])
+
+    for a in range(-15, 16, 2):
+        draw_x_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), a, [-3, 3])
 
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
@@ -122,9 +126,8 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
 def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
     x1, x2 = boundaries
     r = f"{a} / sin(theta)"
-    eval_acot = lambda x, a: acot(x / a)
-    theta1 = (eval_acot(x1, a) + pi) if eval_acot(x1, a) < 0 else eval_acot(x1, a)
-    theta2 = (eval_acot(x2, a) + pi) if eval_acot(x2, a) < 0 else eval_acot(x2, a)
+    theta1 = (acot(x1 / a) + pi) if acot(x1 / a) < 0 else acot(x1 / a)
+    theta2 = (acot(x2 / a) + pi) if acot(x2 / a) < 0 else acot(x2 / a)
 
     if a >= 0:
         draw_polar(
@@ -150,6 +153,19 @@ def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
 def draw_x_equals_a(origin: tuple, a: float, boundaries: list):
     y1, y2 = boundaries
     r = f"{a} / cos(theta)"
+    theta1 = atan(y1 / a)
+    theta2 = atan(y2 / a)
+
+    draw_polar(
+        origin,
+        r,
+        [min(theta1, theta2), max(theta1, theta2), pi / 196],
+        (-15, 15),
+        (y1, y2),
+        (-350, 350),
+        (-200, 200)
+    )
+
 
 
 
