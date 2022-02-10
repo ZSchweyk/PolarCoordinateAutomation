@@ -119,7 +119,6 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
             previous_cart_1 = x1, y1
             previous_cart_2 = x2, y2
 
-
         elif continue_drawing == 2:
             print("Drawing was stopped.")
             is_program_running = False
