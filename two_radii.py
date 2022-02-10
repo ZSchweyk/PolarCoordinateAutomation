@@ -51,17 +51,13 @@ def polar_equations():
     )
 
 
-
-
-
-def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
-               x_scaled: tuple, y_scaled: tuple):
+def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple, x_scaled: tuple,
+               y_scaled: tuple):
     pyautogui.moveTo(origin[0], origin[1])
     pyautogui.leftClick()
 
     global is_program_running
     global continue_drawing
-
 
     builtin_restrictions = {
         "min": min,
@@ -83,8 +79,6 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
         is_program_running = False
         return
 
-    # print(np.arange(np_arange_args[0], (np_arange_args[1] + .01), np_arange_args[2]))
-
     previous_cart_1 = ()
     previous_cart_2 = ()
 
@@ -96,7 +90,6 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
 
             x1, y1 = convert_to_cartesian(theta1, r1)
             x2, y2 = convert_to_cartesian(theta2, r2)
-
 
             x1 = scale(x1, x_orig[0], x_orig[1], x_scaled[0], x_scaled[1])
             y1 = scale(y1, y_orig[0], y_orig[1], y_scaled[0], y_scaled[1])
