@@ -101,8 +101,6 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
 
             if count == 0:
                 pyautogui.moveTo(x, y)
-            # elif count % 20 == 0:
-            #     time.sleep(2)
             else:
                 pyautogui.dragTo(x, y, duration=.025)
             count += 1
