@@ -55,10 +55,8 @@ def polar_equations():
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
                x_scaled: tuple, y_scaled: tuple):
-
     pyautogui.moveTo(origin[0], origin[1])
     pyautogui.leftClick()
-
 
     global is_program_running
     global continue_drawing
@@ -150,6 +148,7 @@ def draw_y_equals_a(origin: tuple, a: float, boundaries: list):
             (0, 350)
         )
 
+
 def draw_x_equals_a(origin: tuple, a: float, boundaries: list):
     y1, y2 = boundaries
     r = f"{a} / cos(theta)"
@@ -165,8 +164,6 @@ def draw_x_equals_a(origin: tuple, a: float, boundaries: list):
         (-350, 350),
         (-200, 200)
     )
-
-
 
 
 # equations = [
