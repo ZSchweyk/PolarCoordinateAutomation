@@ -40,21 +40,18 @@ def polar_equations():
     screen_size = pyautogui.size()
     print(screen_size)
 
-    # draw_polar(
-    #     (screen_size.width / 2, screen_size.height / 2),
-    #     "8",
-    #     [0, 2 * pi, pi / 1000],
-    #     (-8, 8),
-    #     (-8, 8),
-    #     (-350, 350),
-    #     (-350, 350)
-    # )
+    draw_polar(
+        (screen_size.width / 2 - 400, screen_size.height / 2),
+        "8",
+        [0, 2 * pi, pi / 100],
+        (-8, 8),
+        (-8, 8),
+        (-350, 350),
+        (-350, 350)
+    )
 
-    # for a in range(-1, -16, -2):
-    #     draw_y_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), a, [-5, 5])
 
-    for a in range(-15, 16, 2):
-        draw_x_equals_a((screen_size.width / 2 - 500, screen_size.height / 2 - 50), a, [-3, 3])
+
 
 
 def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple, y_orig: tuple,
@@ -91,10 +88,11 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
     previous_cart_1 = ()
     previous_cart_2 = ()
 
-    count_1 = 0
-    count_2 = 0
+    set_previous = True
     for theta1 in np.arange(np_arange_args[0], (np_arange_args[1] / 2 + .01), np_arange_args[2]):
         if continue_drawing == 1:
+
+
             theta2 = theta1 + pi
             r1 = eval(equation.replace("theta", "theta1"))
             r2 = eval(equation.replace("theta", "theta2"))
@@ -118,16 +116,21 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
             print("theta1:", (x1, y1))
             print("theta2:", (x2, y2))
 
+            if set_previous:
+                previous_cart_1 = (x1, y1)
+                previous_cart_2 = (x2, y2)
+                set_previous = False
+
+            pyautogui.moveTo(previous_cart_1[0], previous_cart_1[1])
+            pyautogui.dragTo(x1, y1, duration=.025)
+
+            pyautogui.moveTo(previous_cart_2[0], previous_cart_2[1])
+            pyautogui.dragTo(x2, y2, duration=.025)
+
             previous_cart_1 = (x1, y1)
             previous_cart_2 = (x2, y2)
 
-            if count_1 == 0:
-                pyautogui.moveTo(x1, y1)
-            else:
-                pyautogui.dragTo(x1, y1, duration=.025)
 
-
-            count_1 += 1
         elif continue_drawing == 2:
             print("Drawing was stopped.")
             is_program_running = False
