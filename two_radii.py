@@ -42,10 +42,10 @@ def polar_equations():
 
     draw_polar(
         (screen_size.width / 2 - 400, screen_size.height / 2),
-        "8",
+        "3 * sin(4 * theta)",
         [0, 2 * pi, pi / 100],
-        (-8, 8),
-        (-8, 8),
+        (-3, 3),
+        (-3, 3),
         (-350, 350),
         (-350, 350)
     )
