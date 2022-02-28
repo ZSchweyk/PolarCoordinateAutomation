@@ -41,9 +41,9 @@ def polar_equations():
     print(screen_size)
 
     draw_polar(
-        (screen_size.width / 2, screen_size.height / 2),
+        (screen_size.width / 2 - 400, screen_size.height / 2),
         "3 * sin(4 * theta)",
-        [0, 2 * pi, pi / 500],
+        [0, 2 * pi, pi / 80],
         (-3, 3),
         (-3, 3),
         (-350, 350),
@@ -103,8 +103,14 @@ def draw_polar(origin: tuple, equation: str, np_arange_args: list, x_orig: tuple
             x2 += origin[0]
             y2 += origin[1]
 
-            print("theta1:", (x1, y1))
-            print("theta2:", (x2, y2))
+            print(f"{(r1 >= 0) == (r2 >= 0)}")
+
+            # print(f"r1: {r1 >= 0}", end=" ")
+            # print(f"r2: {r2 >= 0}")
+            # print(f"{r2=}")
+            # print(f"theta1 = {theta1 * 180/pi}")
+            # print(f"theta2 = {theta2 * 180/pi}")
+
 
             if previous_cart_1 == () and previous_cart_2 == ():
                 previous_cart_1 = (x1, y1)
