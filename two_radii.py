@@ -41,13 +41,13 @@ def polar_equations():
     print(screen_size)
 
     draw_polar(
-        (screen_size.width / 2 - 400, screen_size.height / 2),
+        (screen_size.width / 2, screen_size.height / 2),
         "3 * sin(4 * theta)",
-        [0, 2 * pi, pi / 80],
+        [0, 2 * pi, pi / 800],
         (-3, 3),
         (-3, 3),
-        (-350, 350),
-        (-350, 350)
+        (-300, 300),
+        (-300, 300)
     )
 
 
